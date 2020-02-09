@@ -28,10 +28,9 @@ public class StatusService {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Comment comment = new Comment();
-            comment.itemId = itemId;
-            comment.text = createStatus;
-            session.save(comment);
+            Status status = new Status();
+            status.statusName = createStatus;
+            session.save(status);
             transaction.commit();
             session.close();
         }catch (Exception ex){
