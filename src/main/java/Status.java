@@ -1,21 +1,37 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Status {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer typeId;
+    Integer statusId;
     String statusName;
+
+    @ManyToOne
+    @JoinColumn (name = "statusId")
+    Project idStatusProject;
+
+    @ManyToOne
+    @JoinColumn (name = "statusId")
+    Item idStatusItem;
 
     @Override
     public String toString() {
         return "Status{" +
-                "typeId=" + typeId +
+                "statusId=" + statusId +
                 ", statusName='" + statusName + '\'' +
+                ", idStatusProject=" + idStatusProject +
+                ", idStatusItem=" + idStatusItem +
                 '}';
     }
+
+
+    //    @Override
+//    public String toString() {
+//        return "Status{" +
+//                "typeId=" + statusId +
+//                ", statusName='" + statusName + '\'' +
+//                '}';
+//    }
 }

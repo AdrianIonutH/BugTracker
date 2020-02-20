@@ -1,7 +1,5 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Project {
@@ -15,6 +13,10 @@ public class Project {
     String description;
     Integer statusId;
 
+@OneToMany
+        (mappedBy = "idStatusProject")
+List<Status> Status;
+
     @Override
     public String toString() {
         return "Project{" +
@@ -23,6 +25,18 @@ public class Project {
                 ", shortName='" + shortName + '\'' +
                 ", description='" + description + '\'' +
                 ", statusId=" + statusId +
+                ", Status=" + Status +
                 '}';
     }
+
+//    @Override
+//    public String toString() {
+//        return "Project{" +
+//                "projectId=" + projectId +
+//                ", name='" + name + '\'' +
+//                ", shortName='" + shortName + '\'' +
+//                ", description='" + description + '\'' +
+//                ", statusId=" + statusId +
+//                '}';
+//    }
 }

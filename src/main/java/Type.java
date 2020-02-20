@@ -1,7 +1,4 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Type {
@@ -11,11 +8,16 @@ public class Type {
     Integer typeId;
     String name;
 
+    @ManyToOne
+    @JoinColumn (name = "typeId")
+    Item idStatusItem;
+
     @Override
     public String toString() {
         return "Type{" +
                 "typeId=" + typeId +
                 ", name='" + name + '\'' +
+                ", idStatusItem=" + idStatusItem +
                 '}';
     }
 }

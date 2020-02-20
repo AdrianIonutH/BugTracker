@@ -1,7 +1,5 @@
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Item {
@@ -14,6 +12,10 @@ public class Item {
     Integer statusId;
     Integer typeId;
 
+    @OneToMany
+            (mappedBy = "idStatusItem")
+    List<Status> Status;
+
     @Override
     public String toString() {
         return "Item{" +
@@ -22,6 +24,7 @@ public class Item {
                 ", description='" + description + '\'' +
                 ", statusId=" + statusId +
                 ", typeId=" + typeId +
+                ", Status=" + Status +
                 '}';
     }
 }
