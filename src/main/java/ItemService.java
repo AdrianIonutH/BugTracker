@@ -1,34 +1,34 @@
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class TypeService {
-    private static TypeService instance;
-    private TypeService(){
+public class ItemService {
+    private static ItemService instance;
+    private ItemService(){
 
     }
-    public static TypeService getInstance(){
+    public static ItemService getInstance(){
         if (instance == null){
-            instance = new TypeService();
+            instance = new ItemService();
         }
         return instance;
     }
-    public Type getType(Integer id) {
+    public Item getItem(Integer id) {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
-            Type typeById = session.find(Type.class, id);
-            System.out.println(typeById);
-            return typeById;
+            Item itemById = session.find(Item.class, id);
+            System.out.println(itemById);
+            return itemById;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
     }
-    public void createType(int itemId, Type createType){
+    public void createItem(int itemId, Item createItem){
         Transaction transaction = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.save(createType);
+            session.save(createItem);
             transaction.commit();
             session.close();
         }catch (Exception ex){
@@ -38,14 +38,14 @@ public class TypeService {
             ex.printStackTrace();
         }
     }
-    public void updateType(int id, String updateType) {
+    public void updateItem(int id, String updateItem) {
         Transaction transaction = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Type typeById = getType(id);
-            typeById.name = updateType;
-            session.update(typeById);
+            Item itemById = getItem(id);
+            itemById.title = updateItem;
+            session.update(itemById);
             session.getTransaction().commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -54,13 +54,13 @@ public class TypeService {
             ex.printStackTrace();
         }
     }
-    public void deleteType(int id) {
+    public void deleteItem(int id) {
         Transaction transaction = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Type typeById = getType(id);
-            session.delete(typeById);
+            Item itemById = getItem(id);
+            session.delete(itemById);
             session.getTransaction().commit();
         } catch (Exception ex) {
             if (transaction != null) {

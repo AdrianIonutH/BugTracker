@@ -23,14 +23,12 @@ public class StatusService {
             return null;
         }
     }
-    public void createStatus(int itemId, String createStatus){
+    public void createStatus(int itemId, Status createStatus){
         Transaction transaction = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Status status = new Status();
-            status.statusName = createStatus;
-            session.save(status);
+            session.save(createStatus);
             transaction.commit();
             session.close();
         }catch (Exception ex){

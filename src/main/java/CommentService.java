@@ -23,15 +23,12 @@ public class CommentService {
             return null;
         }
     }
-    public void createComment(int itemId, String createComment){
+    public void createComment(int itemId, Comment createComment){
         Transaction transaction = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            Comment comment = new Comment();
-            comment.itemId = itemId;
-            comment.text = createComment;
-            session.save(comment);
+            session.save(createComment);
             transaction.commit();
             session.close();
         }catch (Exception ex){

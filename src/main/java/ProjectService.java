@@ -1,34 +1,34 @@
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class TypeService {
-    private static TypeService instance;
-    private TypeService(){
+public class ProjectService {
+    private static ProjectService instance;
+    private ProjectService(){
 
     }
-    public static TypeService getInstance(){
+    public static ProjectService getInstance(){
         if (instance == null){
-            instance = new TypeService();
+            instance = new ProjectService();
         }
         return instance;
     }
-    public Type getType(Integer id) {
+    public Project getProject(Integer id) {
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
-            Type typeById = session.find(Type.class, id);
-            System.out.println(typeById);
-            return typeById;
+            Project projectById = session.find(Project.class, id);
+            System.out.println(projectById);
+            return projectById;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
     }
-    public void createType(int itemId, Type createType){
+    public void createProject(int itemId, Comment createComment){
         Transaction transaction = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            session.save(createType);
+            session.save(createComment);
             transaction.commit();
             session.close();
         }catch (Exception ex){
@@ -38,14 +38,14 @@ public class TypeService {
             ex.printStackTrace();
         }
     }
-    public void updateType(int id, String updateType) {
+    public void updateProject(int id, String updateProject) {
         Transaction transaction = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Type typeById = getType(id);
-            typeById.name = updateType;
-            session.update(typeById);
+            Project projectById = getProject(id);
+            projectById.name = updateProject;
+            session.update(projectById);
             session.getTransaction().commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -54,13 +54,13 @@ public class TypeService {
             ex.printStackTrace();
         }
     }
-    public void deleteType(int id) {
+    public void deleteProject(int id) {
         Transaction transaction = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Type typeById = getType(id);
-            session.delete(typeById);
+            Project projectById = getProject(id);
+            session.delete(projectById);
             session.getTransaction().commit();
         } catch (Exception ex) {
             if (transaction != null) {
