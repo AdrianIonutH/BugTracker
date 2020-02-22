@@ -1,6 +1,8 @@
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.util.List;
+
 public class ProjectService {
     private static ProjectService instance;
     private ProjectService(){
@@ -38,14 +40,12 @@ public class ProjectService {
             ex.printStackTrace();
         }
     }
-    public void updateProject(int id, String updateProject) {
+    public void updateProject(Project updateProject) {
         Transaction transaction = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Project projectById = getProject(id);
-            projectById.name = updateProject;
-            session.update(projectById);
+            session.update(updateProject);
             session.getTransaction().commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -66,6 +66,18 @@ public class ProjectService {
             if (transaction != null) {
                 transaction.rollback();
             }
+            ex.printStackTrace();
+        }
+    }
+    public void selectAllProject() {
+        try {
+            String sql = "from Project";
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            List<Project> project = session.createQuery(sql).list();
+            for (int i = 0; i<project.size(); i++){
+                System.out.println("Proiect: "+project.get(i).projectId+". "+project.get(i).name);
+            }
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

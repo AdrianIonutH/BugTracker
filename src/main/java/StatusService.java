@@ -38,14 +38,12 @@ public class StatusService {
             ex.printStackTrace();
         }
     }
-    public void updateStatus(int id, String updateStatus) {
+    public void updateStatus(String updateStatus) {
         Transaction transaction = null;
         try {
             Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            Status statusById = getStatus(id);
-            statusById.statusName = updateStatus;
-            session.update(statusById);
+            session.update(updateStatus);
             session.getTransaction().commit();
         } catch (Exception ex) {
             if (transaction != null) {

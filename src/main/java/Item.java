@@ -12,9 +12,6 @@ public class Item {
     Integer statusId;
     Integer typeId;
 
-    @OneToMany
-            (mappedBy = "idStatusItem")
-    List<Status> Status;
 
     @Override
     public String toString() {
@@ -24,7 +21,6 @@ public class Item {
                 ", description='" + description + '\'' +
                 ", statusId=" + statusId +
                 ", typeId=" + typeId +
-                ", Status=" + Status +
                 '}';
     }
 }

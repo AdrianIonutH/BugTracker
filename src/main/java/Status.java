@@ -1,4 +1,5 @@
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Status {
@@ -6,27 +7,21 @@ public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer statusId;
+
     String statusName;
 
-    @ManyToOne
-    @JoinColumn (name = "statusId")
-    Project idStatusProject;
+    @OneToMany (mappedBy = "statusIdForeignKey")
+    List<Project> projectList;
 
-    @ManyToOne
-    @JoinColumn (name = "statusId")
-    Item idStatusItem;
 
     @Override
     public String toString() {
         return "Status{" +
                 "statusId=" + statusId +
                 ", statusName='" + statusName + '\'' +
-                ", idStatusProject=" + idStatusProject +
-                ", idStatusItem=" + idStatusItem +
+                ", projectList=" + projectList +
                 '}';
     }
-
-
     //    @Override
 //    public String toString() {
 //        return "Status{" +

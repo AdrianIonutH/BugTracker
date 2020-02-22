@@ -8,16 +8,13 @@ public class Type {
     Integer typeId;
     String name;
 
-    @ManyToOne
-    @JoinColumn (name = "typeId")
-    Item idStatusItem;
+
 
     @Override
     public String toString() {
         return "Type{" +
                 "typeId=" + typeId +
                 ", name='" + name + '\'' +
-                ", idStatusItem=" + idStatusItem +
                 '}';
     }
 }

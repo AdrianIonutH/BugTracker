@@ -6,16 +6,16 @@ public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     Integer projectId;
+
     String name;
     String shortName;
     String description;
-    Integer statusId;
 
-@OneToMany
-        (mappedBy = "idStatusProject")
-List<Status> Status;
+
+@ManyToOne
+@JoinColumn (name = "statusId")
+Status statusIdForeignKey;
 
     @Override
     public String toString() {
@@ -24,11 +24,9 @@ List<Status> Status;
                 ", name='" + name + '\'' +
                 ", shortName='" + shortName + '\'' +
                 ", description='" + description + '\'' +
-                ", statusId=" + statusId +
-                ", Status=" + Status +
+                ", statusIdForeignKey=" + statusIdForeignKey.statusId +
                 '}';
     }
-
 //    @Override
 //    public String toString() {
 //        return "Project{" +
